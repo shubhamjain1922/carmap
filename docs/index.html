@@ -7,12 +7,16 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <style>
   .car {
-    height: 50px;
-    width: 50px;
-    background: red;
+    height: 100px;
+    width: 100px;
+    background: url("car.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     position: absolute;
     top: 200px;
     left: 200px;
+    transform: rotate(-90deg);
   }
 </style>
 </head>
@@ -25,24 +29,52 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script>
+    temp="";
     $(document).keydown(function(event){
       t=$(".car").position().top;
       l=$(".car").position().left;
+      flag=true;
       var key = (event.keyCode ? event.keyCode : event.which);
+      if(temp=="")
+      {
+        $(".car").css({"transition":"0s"})
+      }
+      if(key==temp)
+      {
+        $(".car").css({"transition":"0s"})
+      }
+      else
+        $(".car").css({"transition":"0.5s"})
+      if(temp==40 && key==37)
+      {
+        $(".car").css("transform","rotate(180deg)")
+        flag=false;
+      }
+      if(temp==37 && key==40)
+      {
+        $(".car").css("transform","rotate(-270deg)")
+        flag=false;
+      }
       if(key==37)
       {
+        if(flag)
+          $(".car").css("transform","rotate(-180deg)")
         l-=10;
       }
       else if(key==39)
       {
+        $(".car").css("transform","rotate(0deg)")
         l+=10;
       }
       else if(key==40)
       {
+        if(flag)
+          $(".car").css("transform","rotate(90deg)")
         t+=10;
       }
       else if(key==38)
       {
+        $(".car").css({"transform":"rotate(-90deg)"})
         t-=10;
       }
       if(t<0)
@@ -50,6 +82,7 @@
       if(l<0)
         l=0;
       $(".car").css({"top": ""+t+"px", "left": ""+l+"px"});
+      temp=key;
     })
   </script>
 </body>
