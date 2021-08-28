@@ -8,85 +8,85 @@
   <style>
 
   .box {
-   width: 100px;
-   height: 100px;
-   position: relative;
-   background: #f0f0f0;
-   display: inline-block;
-   margin: 100px;
-   cursor: pointer;
- }
- .box span {
-   position: absolute;
-   display: block;
-   background: #000;
-   transition: all 0.062s linear;
- }
- .box .top, .box .bottom {
-   width: 100%;
-   height: 5px;
-   transform: scaleX(0);
- }
- .box .left, .box .right {
-   width: 5px;
-   height: 100%;
-   transform: scaleY(0);
- }
- .box .top {
-   top: 0;
-   left: 0;
-   transition-delay: 0.187s;
-   transform-origin: top left;
- }
- .box .right {
-   top: 0;
-   right: 0;
-   transition-delay: 0.125s;
-   transform-origin: top left;
- }
- .box .bottom {
-   bottom: 0;
-   right: 0;
-   transition-delay: 0.062s;
-   transform-origin: top right;
- }
- .box .left {
-   top: 0;
-   left: 0;
-   transform-origin: bottom left;
- }
- .enter .top {
-   transition-delay: 0s;
- }
- .enter .right {
-   transition-delay: 0.062s;
- }
- .enter .bottom {
-   transition-delay: 0.125s;
- }
- .enter .left {
-   transition-delay: 0.187s;
- }
- .enter .top, .enter .bottom {
-   transform: scaleX(1);
- }
- .enter .left, .enter .right {
-   transform: scaleY(1);
- }
- 
+    width: 100px;
+    height: 100px;
+    position: relative;
+    background: #f0f0f0;
+    display: inline-block;
+    margin: 100px;
+    cursor: pointer;
+  }
+  .box span {
+    position: absolute;
+    display: block;
+    background: #000;
+    transition: all 0.062s linear;
+  }
+  .box .top, .box .bottom {
+    width: 100%;
+    height: 5px;
+    transform: scaleX(0);
+  }
+  .box .left, .box .right {
+    width: 5px;
+    height: 100%;
+    transform: scaleY(0);
+  }
+  .box .top {
+    top: 0;
+    left: 0;
+    transition-delay: 0.187s;
+    transform-origin: top left;
+  }
+  .box .right {
+    top: 0;
+    right: 0;
+    transition-delay: 0.125s;
+    transform-origin: top left;
+  }
+  .box .bottom {
+    bottom: 0;
+    right: 0;
+    transition-delay: 0.062s;
+    transform-origin: top right;
+  }
+  .box .left {
+    top: 0;
+    left: 0;
+    transform-origin: bottom left;
+  }
+  .enter .top {
+    transition-delay: 0s;
+  }
+  .enter .right {
+    transition-delay: 0.062s;
+  }
+  .enter .bottom {
+    transition-delay: 0.125s;
+  }
+  .enter .left {
+    transition-delay: 0.187s;
+  }
+  .enter .top, .enter .bottom {
+    transform: scaleX(1);
+  }
+  .enter .left, .enter .right {
+    transform: scaleY(1);
+  }
+  
 
- .car {
-  height: 100px;
-  width: 100px;
-  background: url("car.png");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 200px;
-  left: 200px;
-  transform: rotate(-90deg);
-}
+  .car {
+    height: 100px;
+    width: 100px;
+    background: url("car.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    transform: rotate(-90deg);
+  }
 
 </style>
 </head>
