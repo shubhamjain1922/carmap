@@ -6,22 +6,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <style>
-  .car {
-    height: 100px;
-    width: 100px;
-    background: url("car.png");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 200px;
-    left: 200px;
-    transform: rotate(-90deg);
-  }
+
+  .box {
+   width: 100px;
+   height: 100px;
+   position: relative;
+   background: #f0f0f0;
+   display: inline-block;
+   margin: 100px;
+   cursor: pointer;
+ }
+ .box span {
+   position: absolute;
+   display: block;
+   background: #000;
+   transition: all 0.062s linear;
+ }
+ .box .top, .box .bottom {
+   width: 100%;
+   height: 5px;
+   transform: scaleX(0);
+ }
+ .box .left, .box .right {
+   width: 5px;
+   height: 100%;
+   transform: scaleY(0);
+ }
+ .box .top {
+   top: 0;
+   left: 0;
+   transition-delay: 0.187s;
+   transform-origin: top left;
+ }
+ .box .right {
+   top: 0;
+   right: 0;
+   transition-delay: 0.125s;
+   transform-origin: top left;
+ }
+ .box .bottom {
+   bottom: 0;
+   right: 0;
+   transition-delay: 0.062s;
+   transform-origin: top right;
+ }
+ .box .left {
+   top: 0;
+   left: 0;
+   transform-origin: bottom left;
+ }
+ .enter .top {
+   transition-delay: 0s;
+ }
+ .enter .right {
+   transition-delay: 0.062s;
+ }
+ .enter .bottom {
+   transition-delay: 0.125s;
+ }
+ .enter .left {
+   transition-delay: 0.187s;
+ }
+ .enter .top, .enter .bottom {
+   transform: scaleX(1);
+ }
+ .enter .left, .enter .right {
+   transform: scaleY(1);
+ }
+ 
+
+ .car {
+  height: 100px;
+  width: 100px;
+  background: url("car.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  transform: rotate(-90deg);
+}
+
 </style>
 </head>
 <body>
 
+  <div class="box">
+    <span class="top"></span>
+    <span class="right"></span>
+    <span class="bottom"></span>
+    <span class="left"></span>
+  </div>
   <div class="car"></div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -81,9 +157,39 @@
         t=0;
       if(l<0)
         l=0;
+      if(isOverlap(".car",".box"))
+      {
+        $(".box").addClass("enter")
+      }
+      else
+      {
+        $(".box").removeClass("enter")
+      }
+
+      if(isOverlap(".car",".box") && key==13)
+      {
+        console.log("show")
+      }
       $(".car").css({"top": ""+t+"px", "left": ""+l+"px"});
       temp=key;
     })
+
+    function isOverlap(idOne,idTwo){
+      var objOne=$(idOne),
+      objTwo=$(idTwo),
+      offsetOne = objOne.offset(),
+      offsetTwo = objTwo.offset(),
+      topOne=offsetOne.top,
+      topTwo=offsetTwo.top,
+      leftOne=offsetOne.left,
+      leftTwo=offsetTwo.left,
+      widthOne = objOne.width(),
+      widthTwo = objTwo.width(),
+      heightOne = objOne.height(),
+      heightTwo = objTwo.height();
+      var leftTop = leftTwo > leftOne && leftTwo < leftOne+widthOne                  && topTwo > topOne && topTwo < topOne+heightOne,             rightTop = leftTwo+widthTwo > leftOne && leftTwo+widthTwo < leftOne+widthOne                  && topTwo > topOne && topTwo < topOne+heightOne,             leftBottom = leftTwo > leftOne && leftTwo < leftOne+widthOne                  && topTwo+heightTwo > topOne && topTwo+heightTwo < topOne+heightOne,             rightBottom = leftTwo+widthTwo > leftOne && leftTwo+widthTwo < leftOne+widthOne                  && topTwo+heightTwo > topOne && topTwo+heightTwo < topOne+heightOne;
+      return leftTop || rightTop || leftBottom || rightBottom;
+    }
   </script>
 </body>
 </html>
