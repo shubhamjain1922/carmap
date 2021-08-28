@@ -205,9 +205,15 @@
     top: 0;
     opacity: 0;
   }
-
-
-
+  .cross {
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -225,7 +231,9 @@
     </div>
   </div>
   <div class="animateImage"></div>
-  <div class="wrapper"></div>
+  <div class="wrapper">
+    <div class="cross">x</div>
+  </div>
   <div class="car"></div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -310,11 +318,9 @@
           var last_pos = offset("wrap", "per");
           var initial_size = [elem1.width(), elem1.height()];
           var last_size = [elem2.width(), elem2.height()];
-          // var src = elem1.find("img").attr('src');
-          // elem3.attr('src', src);
           elem3.show();
           elem3.css({ "width": initial_size[0] + "px", "height": initial_size[1] + "px", "display": "block", "top": initial_pos.top - 40 + "px", "left": initial_pos.left + "px" });
-          elem1.hide()
+          elem1.css("opacity","0");
           elem3.animate({ "width": last_size[0] + "px", "height": last_size[1] + "px", "top": last_pos.top - 40 + "px", "left": last_pos.left + "px" }, 1000, function () {
             elem3.hide();
             $(".wrapper").css("opacity","1");
@@ -324,6 +330,23 @@
       $(".car").css({"top": ""+t+"px", "left": ""+l+"px"});
       temp=key;
     })
+
+    $(".cross").click(function(){
+     var elem1 = $(".wrapper")
+     var elem2 = $(".popdiv");
+     var elem3 = $(".animateImage");
+     var initial_pos = offset("pop", "div");
+     var last_pos = offset("wrap", "per");
+     var initial_size = [elem1.width(), elem1.height()];
+     var last_size = [elem2.width(), elem2.height()];
+     elem3.show();
+     elem3.css({ "width": initial_size[0] + "px", "height": initial_size[1] + "px", "display": "block", "top": initial_pos.top - 40 + "px", "left": initial_pos.left + "px" });
+     elem1.css("opacity","0");
+     elem3.animate({ "width": last_size[0] + "px", "height": last_size[1] + "px", "top": last_pos.top - 40 + "px", "left": last_pos.left + "px" }, 1000, function () {
+      elem3.hide();
+      $(".popdiv").css("opacity","1");
+    })
+   })
 
     function isOverlap(idOne,idTwo){
       var objOne=$(idOne),
@@ -343,12 +366,12 @@
     }
 
     function offset(name, id) {
-            var el = document.querySelector("."+name + id);
-            var rect = el.getBoundingClientRect(),
-            scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-            scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
-        }
+      var el = document.querySelector("."+name + id);
+      var rect = el.getBoundingClientRect(),
+      scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+      scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+    }
   </script>
 </body>
 </html>
